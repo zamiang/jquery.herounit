@@ -2,7 +2,7 @@
 
 # jQuery.herounit
 
-A jQuery plugin that does...
+An easy way to position and size a 'hero unit' for the plethora of devices we web developers need to support these days. Used in production at Artsy http://artsy.net/design-miami
 
 For documentation, usage and examples please see http://zamiang.github.com/jquery.herounit/
 
@@ -20,13 +20,7 @@ Include required Javascripts
 
 Create html like this
 ```html
-  <div id="feed">
-    <article>
-      <div class="column">Left</div>
-      <div class="column">Center</div>
-      <div class="column">Right</div>
-    </article>
-    ...
+  <div id="hero_unit">
   </div>
 ```
 
@@ -34,9 +28,7 @@ Apply the herounit plugin
 
 ```javascript
 $('#feed').herounit({
-  feedItems      : $('#feed > article'),
-  columnSelector : '> .column',
-  margin         : 90
+  'max-height': 400
 });
 ```
 
