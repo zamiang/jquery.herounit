@@ -4,6 +4,8 @@
 
 An easy way to position and size a 'hero unit' for the plethora of devices we web developers need to support these days. Used in production at Artsy http://artsy.net/design-miami
 
+jQuery.herounit ensures that your image will not be distorted while being vertically centered and flush to the edges of its container.
+
 See [this example](http://htmlpreview.github.com/?https://github.com/zamiang/jquery.herounit/blob/master/example/index.html) using [Placekitten](http://placekitten.com/)
 
 ## Usage
