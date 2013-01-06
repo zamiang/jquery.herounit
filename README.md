@@ -8,7 +8,7 @@ See [this example](http://htmlpreview.github.com/?https://github.com/zamiang/jqu
 
 ## Usage
 
-Download the [production version](https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.min.js) or the [development version](https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.js).
+Download the [production version](https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.min.js) (2.6kb) or the [development version](https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.js).
 
 Include required Javascripts
 ```html
