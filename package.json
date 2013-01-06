@@ -1,0 +1,22 @@
+{
+    "name": "jquery.herounit",
+    "version": "0.0.1",
+    "main": "dist/jquery.herounit",
+    "engines": {
+        "node": ">= 0.6.0"
+    },
+    "scripts": {
+        "test": "grunt jasmine"
+    },
+    "scripts": {
+        "test": "grunt travis --verbose"
+    },
+    "dependencies": {
+        "jQuery": "~1.7.4"
+    },
+    "devDependencies": {
+        "grunt"                : "~0.3.17",
+        "grunt-coffee"         : "0.0.6",
+        "grunt-jasmine-runner" : "0.6.0"
+    }
+}

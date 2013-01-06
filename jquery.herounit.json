@@ -1,0 +1,29 @@
+{
+    "name": "jquery.herounit",
+    "title": "jQuery.herounit",
+    "description": "TODO",
+    "version": "0.1.0",
+    "homepage": "https://github.com/zamiang/jquery.herounit",
+    "author": {
+        "name": "Brennan Moore",
+        "email": "brennanmoore@gmail.com",
+        "url": "http://zamiang.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/zamiang/jquery.herounit.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zamiang/jquery.herounit/issues"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/zamiang/jquery.herounit/blob/master/LICENSE-MIT"
+        }
+    ],
+    "dependencies": {
+        "jquery": "1.7"
+    },
+    "keywords": []
+}
