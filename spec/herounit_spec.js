@@ -4,9 +4,9 @@
     it("should be chainable", function() {
       var item;
       item = $el.herounit({
-        feedItems: $el.children(),
-        columnSelector: '.',
-        margin: 10
+        minHeight: 500,
+        $img: $el.find('img'),
+        $coverArt: $el.find('.coverArt')
       });
       return $el.should === item;
     });
@@ -18,9 +18,9 @@
     it("should require being called on an element", function() {
       return expect(function() {
         return $.fn.herounit({
-          feedItems: $el.children(),
-          columnSelector: '.',
-          margin: 10
+          minHeight: 500,
+          $img: $el.find('img'),
+          $coverArt: $el.find('.coverArt')
         });
       }).toThrow(new Error("Herounit must be called on an element"));
     });
