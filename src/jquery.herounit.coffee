@@ -3,53 +3,43 @@
 #
 # Copyright (c) 2012 Brennan Moore
 # Licensed under the MIT license.
-#
 
 class HeroUnit
 
-  requires: ['minHeight', '$img', '$coverArt']
-  optional: ['fixedHeight', 'afterImageLoadcont']  
+  requires: ['height', '$img']
+  optional: ['afterImageLoadcont']
 
   constructor: ($el, settings) ->
     for require in @requires
       throw "You must pass #{require}" unless settings[require]?
     throw "Herounit must be called on an element" unless $el.length > 0
 
-    @$window = $(window)
+    @$el = $el
     @settings = settings
     @$img = @settings.$img
-    @$coverArt = @settings.$coverArt
-    @fixedHeight = @settings.fixedHeight
-    # @$el.imagesLoaded =>
-    #   @getImageSize()
-    #   @setWidthHeight()
-    #   @centerImage()
-    #   _.defer =>
-    #     @centerImage()
-    #   @$img.addClass 'visible'
-    #   @settings.afterImageLoadcont() if @settings.afterImageLoadcont
+    @$img.load (=> @onImageLoad() )
+
     @onLoad()
-    @$el.height(@fixedHeight) if @fixedHeight
+    @$el.height @settings.height
 
   # background image must be sized auto
   # sizes image
-  getImageSize: =>
-    @$img.css
-      width: 'auto'
+  getImageSize: ->
+    @$img.css width: 'auto'
     @naturalImageHeight = @$img.height()
     @naturalImageWidth = @$img.width()
     @imageRatio = @naturalImageWidth / @naturalImageHeight
-    @minWidth = (@fixedHeight or @minHeight) * @imageRatio
+    @minWidth = Math.floor(@settings.height * @imageRatio)
 
-  setWidthHeight: =>
-    @height = @fixedHeight or @$el.height()
+  setWidthHeight: ->
+    @height = @settings.height or @$el.height()
     @width = @$el.width()
 
   # vertically centers image
-  centerImage: =>
+  centerImage: ->
     @imageHeight = @$img.height()
 
-    if IS_IPHONE # todo fix
+    if window.IS_IPHONE # todo fix
       @$img.width 'auto'
     else
       if @width < @minWidth
@@ -59,7 +49,7 @@ class HeroUnit
         left = 0
         @$img.width @width
 
-    if (@fixedHeight or @height) > @imageHeight
+    if (@settings.height or @height) > @imageHeight
       top = 0
     else 
       top = - Math.floor((@imageHeight - @height) /2)
@@ -70,15 +60,20 @@ class HeroUnit
       'margin-top': "#{top}px"
       'margin-left': "#{left}px"
 
-  onLoad: =>
+  onImageLoad: ->
+    @getImageSize()
+    @setWidthHeight()
+    @centerImage()
+    @centerImage()
+
+    if @settings.afterImageLoadcont then @settings.afterImageLoadcont() else @$img.show()
+
+  onLoad: ->
     unless @IS_IOS
-      @$window.on 'resize.coverArt', @debounce =>
+      $(window).on 'resize.herounit', @debounce =>
         @setWidthHeight()
         @centerImage()
       , 50
-
-  onUnload: ->
-    @$window.off '.coverArt'
 
 
   ##
@@ -110,8 +105,13 @@ methods =
     @
 
   destroy: ->
-    $(window).unbind 'resize.herounit'
+    $(window).off '.herounit'
     @heroUnit.destroy()
+
+  centerImage: -> @heroUnit.centerImage()
+
+  onLoad: -> @heroUnit.onLoad()
+
 
 $.fn.herounit = (method) ->
   if methods[method]?

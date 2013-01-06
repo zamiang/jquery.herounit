@@ -16,12 +16,39 @@
 body {
   margin: 0px;
   padding: 0px;
+  color: #333;
+  font: 13px Helvetica, arial, freesans, clean, sans-serif;
 }
+
+h1, h3 { 
+  width: 500px;
+  margin: 10px auto;
+  line-height: 142%;
+}
+
+.hero-unit {
+  height: 350px;
+  overflow: hidden;
+  margin-bottom: 50px;
+  border: 1px solid cyan;
+}
+
+.hero-unit img { display: none; }
 
 </style>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script type="text/javascript" src="../src/jquery.herounit.js"></script>
+  <script>
+    $(function() {
+      $('.hero-unit').herounit({ height: 350, $img: $('.hero-unit img') });
+    })
+  </script>
 </head>
 <body>
+  <div class="hero-unit">
+    <img src="http://placekitten.com/g/2000/600" />
+  </div>
+  <h1>Example for <a href="https://github.com/zamiang/jquery.herounit">jQuery.heroUnit</a></h1>
+  <h3>Resize your browser to see the image remain vertically centered while remaining vertically and horizontally flush</h3>
 </body>
 </html>

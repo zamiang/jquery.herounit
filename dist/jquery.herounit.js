@@ -3,25 +3,17 @@
 * Copyright (c) 2013 Brennan Moore; Licensed MIT */
 
 (function() {
-  var HeroUnit, methods,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var HeroUnit, methods;
 
   HeroUnit = (function() {
 
-    HeroUnit.prototype.requires = ['minHeight', '$img', '$coverArt'];
+    HeroUnit.prototype.requires = ['height', '$img'];
 
-    HeroUnit.prototype.optional = ['fixedHeight', 'afterImageLoadcont'];
+    HeroUnit.prototype.optional = ['afterImageLoadcont'];
 
     function HeroUnit($el, settings) {
-      this.onLoad = __bind(this.onLoad, this);
-
-      this.centerImage = __bind(this.centerImage, this);
-
-      this.setWidthHeight = __bind(this.setWidthHeight, this);
-
-      this.getImageSize = __bind(this.getImageSize, this);
-
-      var require, _i, _len, _ref;
+      var require, _i, _len, _ref,
+        _this = this;
       _ref = this.requires;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         require = _ref[_i];
@@ -32,15 +24,14 @@
       if (!($el.length > 0)) {
         throw "Herounit must be called on an element";
       }
-      this.$window = $(window);
+      this.$el = $el;
       this.settings = settings;
       this.$img = this.settings.$img;
-      this.$coverArt = this.settings.$coverArt;
-      this.fixedHeight = this.settings.fixedHeight;
+      this.$img.load((function() {
+        return _this.onImageLoad();
+      }));
       this.onLoad();
-      if (this.fixedHeight) {
-        this.$el.height(this.fixedHeight);
-      }
+      this.$el.height(this.settings.height);
     }
 
     HeroUnit.prototype.getImageSize = function() {
@@ -50,18 +41,18 @@
       this.naturalImageHeight = this.$img.height();
       this.naturalImageWidth = this.$img.width();
       this.imageRatio = this.naturalImageWidth / this.naturalImageHeight;
-      return this.minWidth = (this.fixedHeight || this.minHeight) * this.imageRatio;
+      return this.minWidth = Math.floor(this.settings.height * this.imageRatio);
     };
 
     HeroUnit.prototype.setWidthHeight = function() {
-      this.height = this.fixedHeight || this.$el.height();
+      this.height = this.settings.height || this.$el.height();
       return this.width = this.$el.width();
     };
 
     HeroUnit.prototype.centerImage = function() {
       var left, top;
       this.imageHeight = this.$img.height();
-      if (IS_IPHONE) {
+      if (window.IS_IPHONE) {
         this.$img.width('auto');
       } else {
         if (this.width < this.minWidth) {
@@ -72,7 +63,7 @@
           this.$img.width(this.width);
         }
       }
-      if ((this.fixedHeight || this.height) > this.imageHeight) {
+      if ((this.settings.height || this.height) > this.imageHeight) {
         top = 0;
       } else {
         top = -Math.floor((this.imageHeight - this.height) / 2);
@@ -84,18 +75,26 @@
       });
     };
 
+    HeroUnit.prototype.onImageLoad = function() {
+      this.getImageSize();
+      this.setWidthHeight();
+      this.centerImage();
+      this.centerImage();
+      if (this.settings.afterImageLoadcont) {
+        return this.settings.afterImageLoadcont();
+      } else {
+        return this.$img.show();
+      }
+    };
+
     HeroUnit.prototype.onLoad = function() {
       var _this = this;
       if (!this.IS_IOS) {
-        return this.$window.on('resize.coverArt', this.debounce(function() {
+        return $(window).on('resize.herounit', this.debounce(function() {
           _this.setWidthHeight();
           return _this.centerImage();
         }, 50));
       }
-    };
-
-    HeroUnit.prototype.onUnload = function() {
-      return this.$window.off('.coverArt');
     };
 
     HeroUnit.prototype.debounce = function(func, wait) {
@@ -133,8 +132,14 @@
       return this;
     },
     destroy: function() {
-      $(window).unbind('resize.herounit');
+      $(window).off('.herounit');
       return this.heroUnit.destroy();
+    },
+    centerImage: function() {
+      return this.heroUnit.centerImage();
+    },
+    onLoad: function() {
+      return this.heroUnit.onLoad();
     }
   };
 

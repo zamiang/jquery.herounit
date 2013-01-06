@@ -4,8 +4,6 @@
 
 An easy way to position and size a 'hero unit' for the plethora of devices we web developers need to support these days. Used in production at Artsy http://artsy.net/design-miami
 
-For documentation, usage and examples please see http://zamiang.github.com/jquery.herounit/
-
 See [this example](http://htmlpreview.github.com/?https://github.com/zamiang/jquery.herounit/blob/master/example/index.html) using [Placekitten](http://placekitten.com/)
 
 ## Usage
@@ -27,8 +25,9 @@ Create html like this
 Apply the herounit plugin
 
 ```javascript
-$('#feed').herounit({
-  'max-height': 400
+$('#hero_unit').herounit({
+  'height': 400,
+  '$img'  : $('#hero_unit img')
 });
 ```
 
