@@ -19,6 +19,7 @@ Include required Javascripts
 Create html like this
 ```html
   <div id="hero_unit">
+    <img src="heroic/img.jpg" />
   </div>
 ```
 
