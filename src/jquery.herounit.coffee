@@ -17,29 +17,35 @@ class HeroUnit
     @$el = $el
     @settings = settings
     @$img = @settings.$img
-    @$img.load (=> @onImageLoad() )
-
+    @detectPhone()
+    @$img.load (=> @render() )
     @onLoad()
     @$el.height @settings.height
 
+  render: ->
+    @neutralizeImageSize()
+    @setImageAttrs()
+    @centerImage()
+    if @settings.afterImageLoadcont then @settings.afterImageLoadcont() else @$img.show()
+
+  neutralizeImageSize: ->
+    @$img.css
+      height: 'auto'
+      width: 'auto'
+
   # background image must be sized auto
   # sizes image
-  getImageSize: ->
-    @$img.css width: 'auto'
+  setImageAttrs: ->
     @naturalImageHeight = @$img.height()
     @naturalImageWidth = @$img.width()
     @imageRatio = @naturalImageWidth / @naturalImageHeight
     @minWidth = Math.floor(@settings.height * @imageRatio)
-
-  setWidthHeight: ->
     @height = @settings.height or @$el.height()
     @width = @$el.width()
 
   # vertically centers image
   centerImage: ->
-    @imageHeight = @$img.height()
-
-    if window.IS_IPHONE # todo fix
+    if @IS_PHONE
       @$img.width 'auto'
     else
       if @width < @minWidth
@@ -49,32 +55,21 @@ class HeroUnit
         left = 0
         @$img.width @width
 
-    if (@settings.height or @height) > @imageHeight
+    if @height >= @$img.height()
       top = 0
     else 
-      top = - Math.floor((@imageHeight - @height) /2)
-
-    @coverTop = top
+      top = - Math.abs(Math.floor((@height - @$img.height()) /2))
 
     @$img.css
-      'margin-top': "#{top}px"
+      'margin-top' : "#{top}px"
       'margin-left': "#{left}px"
 
-  onImageLoad: ->
-    @getImageSize()
-    @setWidthHeight()
-    @centerImage()
-    @centerImage()
-
-    if @settings.afterImageLoadcont then @settings.afterImageLoadcont() else @$img.show()
-
   onLoad: ->
-    unless @IS_IOS
+    unless @IS_PHONE
       $(window).on 'resize.herounit', @debounce =>
-        @setWidthHeight()
-        @centerImage()
-      , 50
-
+        @render()
+      , 100
+    @render()
 
   ##
   ## Helpers 
@@ -90,11 +85,15 @@ class HeroUnit
       clearTimeout timeout
       timeout = setTimeout(throttler, wait)
 
-  # iOS resize event fires when document height or width change (such as when items are added to the dom)
-  # we need to detect iOS and take an alternative path
-  detectiOS: ->
-    uagent = navigator.userAgent.toLowerCase()
-    @IS_IOS = uagent.match(/(iPhone|iPod|iPad)/i)?
+  # do not bind resize events for 2 reasons
+  # - iOS resize event fires when document height or width change (such as when items are added to the dom)
+  # - phones don't exactly 'resize' like browsers do (todo: bind on rotate)
+  detectPhone: ->
+    @uagent = navigator.userAgent.toLowerCase()
+    @IS_PHONE =
+      @uagent.search('iphone') > -1 or
+      @uagent.search('ipod') > -1 or
+      (@uagent.search('android') > -1 and @uagent.search('mobile') > -1)
 
 
 methods =
@@ -109,7 +108,7 @@ methods =
     @heroUnit.destroy()
 
   centerImage: -> @heroUnit.centerImage()
-
+  render: -> @heroUnit.render()
   onLoad: -> @heroUnit.onLoad()
 
 
