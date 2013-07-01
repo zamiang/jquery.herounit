@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Jquery.herounit by zamiang</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
-        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
     <div class="wrapper">
@@ -27,66 +28,66 @@
       </header>
       <section>
         <h1>
-          <a name="jqueryherounit" class="anchor" href="#jqueryherounit"><span class="octicon octicon-link"></span></a>jQuery.herounit</h1>
+<a name="jqueryherounit" class="anchor" href="#jqueryherounit"><span class="octicon octicon-link"></span></a>jQuery.herounit</h1>
 
-        <p>An easy way to position and size a 'hero unit' for the plethora of devices we web developers need to support these days. Used in production at Artsy <a href="http://artsy.net/design-miami">http://artsy.net/design-miami</a></p>
+<p>An easy way to position and size a 'hero unit' for the plethora of devices we web developers need to support these days. Used in production at Artsy <a href="http://artsy.net/design-miami">http://artsy.net/design-miami</a></p>
 
-        <p>jQuery.herounit ensures that your image will not be distorted while being vertically centered and flush to the edges of its container.</p>
+<p>jQuery.herounit ensures that your image will not be distorted while being vertically centered and flush to the edges of its container.</p>
 
-        <p>See <a href="http://zamiang.github.io/jquery.herounit/example/index.html">this example</a> using <a href="http://placekitten.com/">Placekitten</a></p>
+<p>See <a href="http://zamiang.github.io/jquery.herounit/example/index.html">this example</a> using <a href="http://placekitten.com/">Placekitten</a></p>
 
-        <h2>
-          <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-        <p>Download the <a href="https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.min.js">production version</a> (2.6kb) or the <a href="https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.js">development version</a>.</p>
+<p>Download the <a href="https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.min.js">production version</a> (2.6kb) or the <a href="https://raw.github.com/zamiang/jquery.herounit/master/dist/jquery.herounit.js">development version</a>.</p>
 
-        <p>Include required Javascripts</p>
+<p>Include required Javascripts</p>
 
-        <div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-            <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/herounit.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-        </pre></div>
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/herounit.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
 
-        <p>Create html like this</p>
+<p>Create html like this</p>
 
-        <div class="highlight"><pre>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"hero_unit"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"heroic/img.jpg"</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;/div&gt;</span>
-        </pre></div>
+<div class="highlight"><pre>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"hero_unit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"heroic/img.jpg"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+</pre></div>
 
-        <p>Apply the herounit plugin</p>
+<p>Apply the herounit plugin</p>
 
-        <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#hero_unit'</span><span class="p">).</span><span class="nx">herounit</span><span class="p">({</span>
-            <span class="s1">'height'</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-            <span class="s1">'$img'</span>  <span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#hero_unit img'</span><span class="p">)</span>
-            <span class="p">});</span>
-        </pre></div>
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#hero_unit'</span><span class="p">).</span><span class="nx">herounit</span><span class="p">({</span>
+  <span class="s1">'height'</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+  <span class="s1">'$img'</span>  <span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#hero_unit img'</span><span class="p">)</span>
+<span class="p">});</span>
+</pre></div>
 
-        <h2>
-          <a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
-        <p>Contributions and pull requests are very welcome. Please follow these guidelines when submitting new code.</p>
+<p>Contributions and pull requests are very welcome. Please follow these guidelines when submitting new code.</p>
 
-        <h3>
-          <a name="modifying-the-code" class="anchor" href="#modifying-the-code"><span class="octicon octicon-link"></span></a>Modifying the code</h3>
+<h3>
+<a name="modifying-the-code" class="anchor" href="#modifying-the-code"><span class="octicon octicon-link"></span></a>Modifying the code</h3>
 
-        <ol>
-          <li>Fork and clone the repo.</li>
-          <li>If needed: <code>npm install -g grunt</code> for <a href="https://github.com/gruntjs/grunt">Grunt</a>
-          </li>
-          <li>If needed: <code>brew install phantomjs</code> for <a href="http://phantomjs.org/download.html">PhantomJS</a>
-          </li>
-          <li>Run <code>npm install</code> to install dependencies</li>
-          <li>Run <code>grunt</code> (compiles coffeescripts and runs tests)</li>
-          <li>Run <code>grunt watch</code> while editing files to auto-compile coffeescripts and run tests</li>
-          <li>Make all changes in Coffeescript files, not JavaScript files.</li>
-        </ol><h3>
-          <a name="submitting-pull-requests" class="anchor" href="#submitting-pull-requests"><span class="octicon octicon-link"></span></a>Submitting pull requests</h3>
+<ol>
+<li>Fork and clone the repo.</li>
+<li>If needed: <code>npm install -g grunt</code> for <a href="https://github.com/gruntjs/grunt">Grunt</a>
+</li>
+<li>If needed: <code>brew install phantomjs</code> for <a href="http://phantomjs.org/download.html">PhantomJS</a>
+</li>
+<li>Run <code>npm install</code> to install dependencies</li>
+<li>Run <code>grunt</code> (compiles coffeescripts and runs tests)</li>
+<li>Run <code>grunt watch</code> while editing files to auto-compile coffeescripts and run tests</li>
+<li>Make all changes in Coffeescript files, not JavaScript files.</li>
+</ol><h3>
+<a name="submitting-pull-requests" class="anchor" href="#submitting-pull-requests"><span class="octicon octicon-link"></span></a>Submitting pull requests</h3>
 
-        <ol>
-          <li>Add tests for the change you want to make. Run <code>grunt jasmine</code> to see if tests fail.</li>
-          <li>Run <code>grunt</code> to compile new dist and make sure nothing is broken</li>
-          <li>Submit a Pull Request using GitHub.</li>
-        </ol>
+<ol>
+<li>Add tests for the change you want to make. Run <code>grunt jasmine</code> to see if tests fail.</li>
+<li>Run <code>grunt</code> to compile new dist and make sure nothing is broken</li>
+<li>Submit a Pull Request using GitHub.</li>
+</ol>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/zamiang">zamiang</a></p>
@@ -94,5 +95,6 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
+
   </body>
 </html>
